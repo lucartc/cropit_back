@@ -5,7 +5,7 @@ class ApiController < ApplicationController
 	end
 
 	def download
-		binding.pry params
+		binding.pry
 		render json: {msg: 'ok'}, status: :ok
 	end
 
