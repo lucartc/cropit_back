@@ -5,8 +5,8 @@ class ApiController < ApplicationController
 	end
 
 	def download
-		binding.pry
 		file = Tempfile.create(binmode: true)
+		output_images = []
 		content = params["image_content"].gsub(/data:.+;base64,/,'')
 		decoded_content = Base64.decode64(content)
 		cropped_images = params["cropped_images"]
@@ -15,12 +15,32 @@ class ApiController < ApplicationController
 		source_image = Vips::Image.new_from_file(file.path)
 		
 		cropped_images.each do |image|
-			puts image
+			cropped_image_width = image["image_width"]
+			cropped_image_heigth = image["image_height"]
+			cropped_image_distance_top = image["top"]
+			cropped_image_distance_left = image["left"]
+			scale = cropped_image_width.to_f/source_image.width.to_f
+
+			if scale > 1
+				image = image.resize(1 + ((cropped_image_width.to_f - source_image.width.to_f) / source_image.width.to_f))
+			else
+				image = image.resize(1 - ((source_image.width.to_f - cropped_image_width.to_f) / source_image_width.to_f))
+			end
+
+			image = image.embed(
+								cropped_image_distance_left,
+								cropped_image_distance_top,
+								cropped_image_width,
+								cropped_image_heigth,
+								extend: :white
+							)
+
+			output = Tempfile.create(binmode: true)
+			image.write_to_file(output.path)
+			output_images << output.path
 		end
 
-		binding.pry
-
-		render json: {msg: 'ok'}, status: :ok
+		render json: {msg: output_images}, status: :ok
 	end
 
 end
