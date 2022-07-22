@@ -12,7 +12,7 @@ class ApiController < ApplicationController
 		cropped_images = params["cropped_images"]
 		file.write(decoded_content)
 
-		source_image = Vips::Image.new_from_file(File.open(file.path,'r'))
+		source_image = Vips::Image.new_from_file(file.path)
 		
 		cropped_images.each_with_index do |image,index|
 			cropped_image_width = image["image_width"]
