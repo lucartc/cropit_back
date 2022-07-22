@@ -177,6 +177,7 @@ DEPENDENCIES
   pry
   puma (~> 5.0)
   rails (~> 7.0.3, >= 7.0.3.1)
+  ruby-vips
   sqlite3 (~> 1.4)
   tzinfo-data
 
