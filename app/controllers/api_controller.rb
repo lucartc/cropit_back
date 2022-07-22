@@ -35,7 +35,8 @@ class ApiController < ApplicationController
 								extend: :white
 							)
 
-			output = Tempfile.create(binmode: true)
+			extension = MimeMagic.by_magic(file).extensions.first
+			output = Tempfile.create(['',extension],binmode: true)
 			source_image.write_to_file(output.path)
 			output_images << output.path
 		end
