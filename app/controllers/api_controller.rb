@@ -12,9 +12,9 @@ class ApiController < ApplicationController
 		cropped_images = params["cropped_images"]
 		file.write(decoded_content)
 
-		source_image = Vips::Image.new_from_file(file.path)
+		source_image = Vips::Image.new_from_file(File.open(file.path,'r'))
 		
-		cropped_images.each do |image|
+		cropped_images.each_with_index do |image,index|
 			cropped_image_width = image["image_width"]
 			cropped_image_heigth = image["image_height"]
 			cropped_image_distance_top = image["top"]
@@ -34,14 +34,14 @@ class ApiController < ApplicationController
 								cropped_image_heigth,
 								extend: :white
 							)
-
-			extension = ".#{MimeMagic.by_magic(file).extensions.first}"
-			output = Tempfile.create(['',extension],binmode: true)
+			output = Tempfile.create(['','.jpeg'],binmode: true)
+			puts output.path
 			source_image.write_to_file(output.path)
 			output_images << output.path
 		end
 
+		File.delete(*output_images)
+
 		render json: {msg: output_images}, status: :ok
 	end
-
 end

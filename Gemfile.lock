@@ -95,9 +95,6 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
     method_source (1.0.0)
-    mimemagic (0.4.3)
-      nokogiri (~> 1)
-      rake
     mini_magick (4.11.0)
     mini_mime (1.1.2)
     minitest (5.16.2)
@@ -177,7 +174,6 @@ DEPENDENCIES
   bootsnap
   debug
   image_processing (~> 1.12, >= 1.12.2)
-  mimemagic
   pry
   puma (~> 5.0)
   rails (~> 7.0.3, >= 7.0.3.1)
