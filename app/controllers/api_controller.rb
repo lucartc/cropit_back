@@ -42,8 +42,8 @@ class ApiController < ApplicationController
 		zipfile = Tempfile.create(binmode: true)
 
 		Zip::File.open(zipfile.path,create: true) do |zip|
-			output_images.each do |saved_image|
-				zip.add(saved_image.split('/').last,File.open(saved_image))
+			output_images.each_with_index do |saved_image,index|
+				zip.add("#{image}_#{index}",saved_image)
 			end
 		end
 
