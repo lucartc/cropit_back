@@ -35,13 +35,22 @@ class ApiController < ApplicationController
 								extend: :white
 							)
 			output = Tempfile.create(['','.jpeg'],binmode: true)
-			puts output.path
 			source_image.write_to_file(output.path)
 			output_images << output.path
 		end
 
-		File.delete(*output_images)
+		zipfile = Tempfile.create(binmode: true)
 
-		render json: {msg: output_images}, status: :ok
+		Zip::File.open(zipfile.path,create: true) do |zip|
+			output_images.each do |saved_image|
+				zipfile.add(saved_image.split('/').last,File.open(saved_image))
+			end
+		end
+
+		zip = File.open(zipfile.path,'r')
+
+		File.delete(*output_images)
+		
+		render json: {zip: zip.read}, status: :ok
 	end
 end
