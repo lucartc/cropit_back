@@ -156,6 +156,7 @@ GEM
       io-console (~> 0.5)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
+    rubyzip (2.3.2)
     sqlite3 (1.4.4)
     strscan (3.0.3)
     thor (1.2.1)
@@ -166,7 +167,8 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     zeitwerk (2.6.0)
-    zip (2.0.2)
+    zip-zip (0.3)
+      rubyzip (>= 1.0.0)
 
 PLATFORMS
   x86_64-linux
@@ -181,7 +183,7 @@ DEPENDENCIES
   ruby-vips
   sqlite3 (~> 1.4)
   tzinfo-data
-  zip
+  zip-zip
 
 RUBY VERSION
    ruby 3.0.0p0
