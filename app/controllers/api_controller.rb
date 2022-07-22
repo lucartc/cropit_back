@@ -51,6 +51,6 @@ class ApiController < ApplicationController
 
 		File.delete(*output_images)
 		
-		render json: {zip: zip.read}, status: :ok
+		send_data zip.read, :filename => 'images.zip', :type => 'application/zip'
 	end
 end
