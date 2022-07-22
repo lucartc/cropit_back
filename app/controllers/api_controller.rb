@@ -43,7 +43,7 @@ class ApiController < ApplicationController
 
 		Zip::File.open(zipfile.path,create: true) do |zip|
 			output_images.each do |saved_image|
-				zipfile.add(saved_image.split('/').last,File.open(saved_image))
+				zip.add(saved_image.split('/').last,File.open(saved_image))
 			end
 		end
 
