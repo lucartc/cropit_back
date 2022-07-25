@@ -19,6 +19,8 @@ class ApiController < ApplicationController
 			cropped_image_heigth = image["image_height"]
 			cropped_image_distance_top = image["top"]
 			cropped_image_distance_left = image["left"]
+			container_width = image["container_width"]
+			container_heigth = image["container_height"]
 			scale = cropped_image_width.to_f/source_image.width.to_f
 
 			if scale > 1
@@ -30,8 +32,8 @@ class ApiController < ApplicationController
 			source_image = source_image.embed(
 								cropped_image_distance_left,
 								cropped_image_distance_top,
-								cropped_image_width,
-								cropped_image_heigth,
+								container_width,
+								container_heigth,
 								extend: :white
 							)
 			output = Tempfile.create(['','.jpeg'],binmode: true)
