@@ -26,7 +26,7 @@ class ApiController < ApplicationController
 			if scale > 1
 				source_image = source_image.resize(1 + ((cropped_image_width.to_f - source_image.width.to_f) / source_image.width.to_f))
 			else
-				source_image = source_image.resize(1 - ((source_image.width.to_f - cropped_image_width.to_f) / source_image_width.to_f))
+				source_image = source_image.resize(1 - ((source_image.width.to_f - cropped_image_width.to_f) / source_image.width.to_f))
 			end
 
 			source_image = source_image.embed(
