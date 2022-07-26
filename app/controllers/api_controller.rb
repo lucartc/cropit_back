@@ -11,7 +11,7 @@ class ApiController < ApplicationController
 		cropped_images = params["cropped_images"]
 
 		sources = sources.map{|key,value|
-			file = new Tempfile.create(binmode: true)
+			file = Tempfile.create(binmode: true)
 			file.write(Base64.decode64(value))
 			{key => file}
 		}
