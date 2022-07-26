@@ -23,13 +23,13 @@ class ApiController < ApplicationController
 
 			cropped_images.each_with_index do |image,index|
 				if image["source"].to_s == source.keys.first
-					cropped_image_width = image["image_width"].to_f
-					cropped_image_heigth = image["image_height"].to_f
+					cropped_image_width = image["width"].to_f
+					cropped_image_heigth = image["height"].to_f
 					cropped_image_distance_top = image["top"].to_f
 					cropped_image_distance_left = image["left"].to_f
 					crop_window_width = image["crop_window_width"].to_f
 					crop_window_heigth = image["crop_window_height"].to_f
-					scale = cropped_image_width.to_f/source_image.width.to_f
+					scale = cropped_image_width/source_image.width
 
 					if scale > 1
 						source_image = source_image.resize(1 + ((cropped_image_width - source_image.width) / source_image.width))
