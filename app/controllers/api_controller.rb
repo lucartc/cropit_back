@@ -7,7 +7,7 @@ class ApiController < ApplicationController
 	def download
 		output_images = []
 
-		params.permit(:sources,:cropped_images)
+		params.permit!
 
 		sources = params["sources"].to_h
 		cropped_images = params["cropped_images"]
