@@ -27,7 +27,7 @@ class ApiController < ApplicationController
 					cropped_image_heigth = image["image_height"].to_f
 					cropped_image_distance_top = image["top"].to_f
 					cropped_image_distance_left = image["left"].to_f
-					crop_window_width = image["crop_windo_width"].to_f
+					crop_window_width = image["crop_window_width"].to_f
 					crop_window_heigth = image["crop_window_height"].to_f
 					scale = cropped_image_width.to_f/source_image.width.to_f
 
