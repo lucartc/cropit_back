@@ -16,7 +16,7 @@ class ApiController < ApplicationController
 			{key => file}
 		}
 
-		sources.each do |source|{
+		sources.each do |source|
 			source_image = Vips::Image.new_from_file(source.value.path)
 
 			cropped_images.each_with_index do |image,index|
@@ -48,7 +48,7 @@ class ApiController < ApplicationController
 					output_images << output.path
 				end
 			end
-		}
+		end
 
 		zipfile = Tempfile.create(binmode: true)
 
