@@ -18,11 +18,11 @@ class ApiController < ApplicationController
 			{key => file}
 		}
 
-		sources.each do |source|
-			source_image = Vips::Image.new_from_file(source.value.path)
+		sources.entries.each do |key,value|
+			source_image = Vips::Image.new_from_file(value.path)
 
 			cropped_images.each_with_index do |image,index|
-				if image["source"].to_s == source.key.to_s
+				if image["source"].to_s == key.to_s
 					cropped_image_width = image["image_width"].to_f
 					cropped_image_heigth = image["image_height"].to_f
 					cropped_image_distance_top = image["top"].to_f
