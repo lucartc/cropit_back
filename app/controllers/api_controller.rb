@@ -19,7 +19,7 @@ class ApiController < ApplicationController
 		}
 
 		sources.entries.each do |source|
-			source_image = Vips::Image.new_from_file(source.values.first)
+			source_image = Vips::Image.new_from_file(source.values.first.path)
 
 			cropped_images.each_with_index do |image,index|
 				if image["source"].to_s == source.keys.first
