@@ -28,25 +28,25 @@ class ApiController < ApplicationController
 					cropped_image_distance_top = image["top"].to_f
 					cropped_image_distance_left = image["left"].to_f
 					crop_window_width = image["crop_window_width"].to_f
-					crop_window_heigth = image["crop_window_height"].to_f
+					crop_window_height = image["crop_window_height"].to_f
 					scale = cropped_image_width/source_image.width
 
 					if scale > 1
-						source_image = source_image.resize(1 + ((cropped_image_width - source_image.width) / source_image.width))
+						resized_image = source_image.resize(1 + ((cropped_image_width - source_image.width) / source_image.width))
 					else
-						source_image = source_image.resize(1 - ((source_image.width - cropped_image_width) / source_image.width))
+						resized_image = source_image.resize(1 - ((source_image.width - cropped_image_width) / source_image.width))
 					end
 
-					source_image = source_image.embed(
+					resized_image = resized_image.embed(
 														cropped_image_distance_left,
 														cropped_image_distance_top,
 														crop_window_width,
-														crop_window_heigth,
+														crop_window_height,
 														extend: :white
 													)
 
 					output = Tempfile.create(['','.jpeg'],binmode: true)
-					source_image.write_to_file(output.path)
+					resized_image.write_to_file(output.path)
 					output_images << output.path
 				end
 			end
