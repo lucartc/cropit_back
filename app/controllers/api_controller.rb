@@ -1,7 +1,12 @@
 class ApiController < ApplicationController
 
+    def bypass_cors(request,response)
+        response['Access-Control-Allow-Origin'] = request.headers['HTTP_ORIGIN']
+    end
+
 	def post_preflight
-		head :no_content, access_control_allow_methods: "POST", access_control_allow_headers: "*"
+		bypass_cors(request,response)
+		head :no_content, access_control_allow_methods: "POST", access_control_allow_headers: "Content-Type"
 	end
 
 	def download
